@@ -4,7 +4,7 @@
 // , "description" : "Extract a pixiv photo"
 // , "include"     : ["content"]
 // , "match"       : ["http://www.pixiv.net/member_illust.php?*"]
-// , "version"     : "0.0.1"
+// , "version"     : "0.0.2"
 // , "downloadURL" : "https://raw.githubusercontent.com/eru/extractor.photo.pixiv.tbrl.js/master/extractor.photo.pixiv.tbrl.js"
 // }
 // ==/Taberareloo==
@@ -148,6 +148,8 @@
         'body > img:only-child',
         // mode=manga
         'img.image',
+        // book(mode=manga)
+        'div.image > img',
         // non-r18 illust on logout
         '.cool-work-main > .img-container > a.medium-image > img',
         // r18 on logout
