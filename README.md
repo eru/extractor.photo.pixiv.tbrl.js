@@ -1,12 +1,12 @@
 # extractor.photo.pixiv.tbrl.js
 Pixiv extractor patch for taberareloo.
 
-This patch port from tombix pixiv extractor.
+This patch port from tombfix pixiv extractor.
 
 # See
 [Patches for Taberareloo](https://github.com/taberareloo/patches-for-taberareloo)
 
-[tombix extarctor](https://github.com/tombfix/core/blob/master/xpi/chrome/content/library/extractors.js)
+[tombfix extarctor](https://github.com/tombfix/core/blob/master/xpi/chrome/content/library/extractors.js)
 
 # Install
 [Click here](https://raw.githubusercontent.com/eru/extractor.photo.pixiv.tbrl.js/master/extractor.photo.pixiv.tbrl.js) and "Right click -> (taberareloo)Share -> Patch - Install"
