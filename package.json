@@ -1,0 +1,23 @@
+{
+  "name": "extractor.photo.pixiv.tbrl",
+  "version": "0.0.3",
+  "description": "Pixiv extractor patch for taberareloo",
+  "main": "extractor.photo.pixiv.tbrl.js",
+  "scripts": {
+    "build": "./node_modules/babel/bin/babel.js extractor.photo.pixiv.tbrl.es6 -o extractor.photo.pixiv.tbrl.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/eru/extractor.photo.pixiv.tbrl.js.git"
+  },
+  "author": "",
+  "license": "",
+  "bugs": {
+    "url": "https://github.com/eru/extractor.photo.pixiv.tbrl.js/issues"
+  },
+  "homepage": "https://github.com/eru/extractor.photo.pixiv.tbrl.js#readme",
+  "devDependencies": {
+    "babel": "^5.8.23"
+  }
+}
