@@ -4,7 +4,7 @@
 // , "description" : "Extract a pixiv photo"
 // , "include"     : ["content"]
 // , "match"       : ["http://www.pixiv.net/member_illust.php?*"]
-// , "version"     : "0.0.3"
+// , "version"     : "0.0.4"
 // , "downloadURL" : "https://raw.githubusercontent.com/eru/extractor.photo.pixiv.tbrl.js/master/extractor.photo.pixiv.tbrl.js"
 // }
 // ==/Taberareloo==
@@ -36,7 +36,7 @@
         var illustID = info.illustID;
 
         return downloadFile(imageURL, {
-          referer: that.REFERRER
+          referrer: that.REFERRER // useless
         }).then(function (file) {
           ctx.title = pageTitle;
           ctx.href = that.PAGE_URL + illustID;
@@ -286,18 +286,20 @@
     },
     fixImageExtensionFromList: function fixImageExtensionFromList(info) {
       var that = this,
-          uriObj = createURI(info.imageURL),
-          extension = uriObj.fileExtension,
+          uri = info.imageURL,
+          extension = getFileExtension(uri),
+          regExtension = new RegExp(extension + '$'),
           extensions = this.IMG_EXTENSIONS.filter(function (candidate) {
         return extension !== candidate;
       });
 
       return (function recursive() {
-        uriObj.fileExtension = extensions.shift();
+        var fileExtension = extensions.shift(),
+            imageURL = uri.replace(regExtension, fileExtension);
 
-        var imageURL = uriObj.spec;
-
-        return downloadFile(imageURL, that.REFERRER).then(function () {
+        return downloadFile(imageURL, {
+          referrer: that.REFERRER // useless
+        }).then(function () {
           return Object.assign(info, { imageURL: imageURL });
         })['catch'](function () {
           if (extensions.length) {

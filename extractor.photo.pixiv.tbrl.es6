@@ -4,7 +4,7 @@
 // , "description" : "Extract a pixiv photo"
 // , "include"     : ["content"]
 // , "match"       : ["http://www.pixiv.net/member_illust.php?*"]
-// , "version"     : "0.0.3"
+// , "version"     : "0.0.4"
 // , "downloadURL" : "https://raw.githubusercontent.com/eru/extractor.photo.pixiv.tbrl.js/master/extractor.photo.pixiv.tbrl.js"
 // }
 // ==/Taberareloo==
@@ -44,7 +44,7 @@
         return downloadFile(
           imageURL,
           {
-            referer : that.REFERRER
+            referrer : that.REFERRER // useless
           }
         ).then(file => {
           ctx.title = pageTitle;
@@ -335,18 +335,23 @@
     },
     fixImageExtensionFromList(info) {
       let that = this,
-          uriObj = createURI(info.imageURL),
-          extension = uriObj.fileExtension,
+          uri = info.imageURL,
+          extension = getFileExtension(uri),
+          regExtension = new RegExp(extension + '$'),
           extensions = this.IMG_EXTENSIONS.filter(candidate =>
             extension !== candidate
           );
 
       return (function recursive() {
-        uriObj.fileExtension = extensions.shift();
+        let fileExtension = extensions.shift(),
+            imageURL = uri.replace(regExtension, fileExtension);
 
-        let imageURL = uriObj.spec;
-
-        return downloadFile(imageURL, that.REFERRER).then(() =>
+        return downloadFile(
+          imageURL,
+          {
+            referrer : that.REFERRER // useless
+          }
+        ).then(() =>
           Object.assign(info, {imageURL})
         ).catch(() => {
           if (extensions.length) {
